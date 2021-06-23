@@ -37,13 +37,20 @@
 </table>
 
 <form action="/createSogn" method="POST">
+    <br>
     <h3>Opret Sogn</h3>
 
-    <br>
+
     <p><input type="text" name="name" placeholder="Navn" required>
     <p>
     <p><input type="text" name="smitteniveau" placeholder="Smitteniveau" required>
     <p><input type="date" name="nedlukningStart" placeholder="Nedlukning" required>
+    <p><select name="kId" required>
+        <option value="">Select Kommune</option>
+        <option th:each="kommune : ${kommuner}"
+                th:value="${kommune.getId()}"
+                th:text="${kommune.getId()}+' '+ ${kommune.getNavn()}"></option>
+    </select>
 
     <div class="button">
         <input type="Submit" class="submit-button" value="  Create!  ">

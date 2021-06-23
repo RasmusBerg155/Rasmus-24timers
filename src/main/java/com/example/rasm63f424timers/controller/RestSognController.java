@@ -46,9 +46,8 @@ public class RestSognController {
     @CrossOrigin(origins = "*", exposedHeaders = "Location")
     @PostMapping(value = "/sogn", consumes = "application/json")
     public ResponseEntity<String> create(@RequestBody Sogn s){
-        Sogn sogn = new Sogn(s.getNavn(), s.getSmitteniveau(), s.getNedlukningStart());
 
-        sognRepo.save(sogn);
+        sognRepo.save(s);
 
         return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/sogn/" + s.getId()).body("{'msg': 'Post created'}");
     }

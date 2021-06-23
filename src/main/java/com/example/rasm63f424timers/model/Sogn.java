@@ -22,10 +22,11 @@ public class Sogn {
     public Sogn(){
     }
 
-    public Sogn(String navn, double smitteniveau, String nedlukningStart) {
+    public Sogn(String navn, double smitteniveau, String nedlukningStart, Kommune kommune) {
         this.navn = navn;
         this.smitteniveau = smitteniveau;
         this.nedlukningStart = nedlukningStart;
+        this.kommune = kommune;
     }
 
     public Long getId() {
