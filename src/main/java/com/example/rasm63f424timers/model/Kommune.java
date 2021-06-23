@@ -1,7 +1,11 @@
 package com.example.rasm63f424timers.model;
 
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Kommune {
@@ -11,6 +15,10 @@ public class Kommune {
     private Long id;
 
     private String navn;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "kommune")
+    private Set<Sogn> sogn;
 
     public Kommune() {
     }
@@ -36,11 +44,12 @@ public class Kommune {
         this.navn = navn;
     }
 
-    @Override
-    public String toString() {
-        return "Kommune{" +
-                "id=" + id +
-                ", navn='" + navn + '\'' +
-                '}';
+    public Set<Sogn> getSogn() {
+        return sogn;
     }
+
+    public void setSogn(Set<Sogn> sogn) {
+        this.sogn = sogn;
+    }
+
 }

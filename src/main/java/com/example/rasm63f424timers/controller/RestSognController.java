@@ -2,6 +2,7 @@ package com.example.rasm63f424timers.controller;
 
 import com.example.rasm63f424timers.model.Kommune;
 import com.example.rasm63f424timers.model.Sogn;
+import com.example.rasm63f424timers.repository.KommuneRepo;
 import com.example.rasm63f424timers.repository.SognRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,19 @@ public class RestSognController {
     @Autowired
     SognRepo sognRepo;
 
+    @Autowired
+    KommuneRepo kommuneRepo;
+
     @GetMapping("/sogn")
     public ResponseEntity<Iterable<Sogn>> findALL(){
         return ResponseEntity.status(HttpStatus.OK).body(sognRepo.findAll());
     }
+
+    @GetMapping("/kommune")
+    public ResponseEntity<Iterable<Kommune>> findALLKommune(){
+        return ResponseEntity.status(HttpStatus.OK).body(kommuneRepo.findAll());
+    }
+
 
     @GetMapping("/sogn/{id}")
     public ResponseEntity<Optional<Sogn>> findById(@PathVariable Long id)
@@ -49,7 +59,6 @@ public class RestSognController {
         if (!optionalSogn.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{'msg' : 'sogn " + id + " not found'");
         }
-
         sognRepo.save(s);
         return ResponseEntity.status(HttpStatus.OK).body("{ 'msg' : 'updated' }");
     }

@@ -10,8 +10,11 @@ function getSogne() {
                     "<td>" + item.id + "</td>" +
                     "<td>" + item.navn + "</td>" +
                     "<td>" + item.smitteniveau + "</td>" +
-                    "<td>" + item.nedlukningStart +
-                    "</td>"+"<td>1</td>"+"</tr>")
+                    "<td>" + item.nedlukningStart + "</td>" +
+                    "<td>" + item.kommune.navn + "</td>" +
+                    "<td>" + '<input type="checkbox" name="check" value="">' + "</td>" +
+                    "<td>" + '<button type = "button" class = "btn btn-danger btn-md" onclick = "deleteAjax( '+ item.id + ')">Delete</button>' + "</td>" +
+                    "</tr>")
             })
             $("#status").html("Svar fra server OK");
         },
@@ -37,4 +40,23 @@ function getKommuner() {
             $("#status").html("Svar fra server ERROR");
         }
     });
+}
+
+function deleteAjax(id){
+
+    if(confirm('are You sure?')){
+
+        $.ajax({
+
+            type: "DELETE",
+            url:"http://localhost:8080/sogn/" + id,
+            success:function(){
+                setTimeout(
+                    function()
+                    {
+                        location.reload();
+                    }, 1);
+            }
+        });
+    }
 }

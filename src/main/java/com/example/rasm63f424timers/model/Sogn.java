@@ -1,6 +1,6 @@
 package com.example.rasm63f424timers.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -15,7 +15,7 @@ public class Sogn {
     private double smitteniveau;
     private String nedlukningStart;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     private Kommune kommune;
 
@@ -66,16 +66,5 @@ public class Sogn {
 
     public void setKommune(Kommune kommune) {
         this.kommune = kommune;
-    }
-
-    @Override
-    public String toString() {
-        return "Sogn{" +
-                "id=" + id +
-                ", navn='" + navn + '\'' +
-                ", smitteniveau=" + smitteniveau +
-                ", nedlukningStart='" + nedlukningStart + '\'' +
-                ", kommune=" + kommune +
-                '}';
     }
 }

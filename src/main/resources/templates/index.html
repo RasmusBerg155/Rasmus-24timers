@@ -36,6 +36,21 @@
     </tbody>
 </table>
 
+<form action="/createSogn" method="POST">
+    <h3>Opret Sogn</h3>
+
+    <br>
+    <p><input type="text" name="name" placeholder="Navn" required>
+    <p>
+    <p><input type="text" name="smitteniveau" placeholder="Smitteniveau" required>
+    <p><input type="date" name="nedlukningStart" placeholder="Nedlukning" required>
+
+    <div class="button">
+        <input type="Submit" class="submit-button" value="  Create!  ">
+    </div>
+    <p>
+</form>
+
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -44,6 +59,7 @@
     });
 </script>
 
+<!--
 <br>
 <br>
 <br>
@@ -95,6 +111,6 @@
     </tr>
     </tbody>
 </table>
-
+-->
 </body>
 </html>
