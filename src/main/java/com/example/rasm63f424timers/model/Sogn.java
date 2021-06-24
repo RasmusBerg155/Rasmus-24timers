@@ -15,8 +15,8 @@ public class Sogn {
     private double smitteniveau;
     private String nedlukningStart;
 
-    @JsonManagedReference
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+   // @JoinColumn(name = "kommune_id")
     private Kommune kommune;
 
     public Sogn(){
