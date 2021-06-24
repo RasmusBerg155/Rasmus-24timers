@@ -1,7 +1,5 @@
 package com.example.rasm63f424timers.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +14,7 @@ public class Sogn {
     private String nedlukningStart;
 
     @ManyToOne(cascade = CascadeType.ALL)
-   // @JoinColumn(name = "kommune_id")
+//    @JoinColumn(name="kommune_id")
     private Kommune kommune;
 
     public Sogn(){

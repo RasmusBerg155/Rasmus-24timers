@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 public class RestSognController {
@@ -48,25 +47,7 @@ public class RestSognController {
     @PostMapping(value = "/sogn", consumes = "application/json")
     public ResponseEntity<String> create(@RequestBody Sogn s){
 
-        Sogn _sogn = new Sogn(s.getNavn(), s.getSmitteniveau(), s.getNedlukningStart(), s.getKommune());
-
-        sognRepo.save(_sogn);
-
-        Set<Kommune> _kommuner = (Set<Kommune>) s.getKommune();
-        for (Kommune kommune : _kommuner) {
-            Optional<Kommune> optionalKommune = kommuneRepo.findById(kommune.getId());
-            if (optionalKommune.isPresent()) {
-                Kommune kom = optionalKommune.get();
-                kom.getSogn().add(_sogn);
-                kommuneRepo.save(kom);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category " + kommune.getId() + " not found");
-            }
-        }
-
-        _sogn.setKommune((Kommune) _kommuner);
-
-        sognRepo.save(_sogn);
+        sognRepo.save(s);
 
         return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/sogn/" + s.getId()).body("{'msg': 'Post created'}");
     }
