@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class RestSognController {
@@ -47,6 +49,14 @@ public class RestSognController {
     @PostMapping(value = "/sogn", consumes = "application/json")
     public ResponseEntity<String> create(@RequestBody Sogn s){
 
+        Set<Kommune> _kommuner = new HashSet<>();
+        kommuneRepo.findAll().forEach(_kommuner::add);
+        for (Kommune kommune: _kommuner) {
+            if (kommune.getId().equals(s.getKommune().getId())) {
+                s.setKommune(kommune);
+            }
+        }
+
         sognRepo.save(s);
 
         return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/sogn/" + s.getId()).body("{'msg': 'Post created'}");
@@ -58,6 +68,16 @@ public class RestSognController {
         if (!optionalSogn.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{'msg' : 'sogn " + id + " not found'");
         }
+
+        Set<Kommune> _kommuner = new HashSet<>();
+        kommuneRepo.findAll().forEach(_kommuner::add);
+
+        for (Kommune kommune: _kommuner) {
+            if (kommune.getId().equals(s.getKommune().getId())) {
+                s.setKommune(kommune);
+            }
+        }
+
         sognRepo.save(s);
         return ResponseEntity.status(HttpStatus.OK).body("{ 'msg' : 'updated' }");
     }
