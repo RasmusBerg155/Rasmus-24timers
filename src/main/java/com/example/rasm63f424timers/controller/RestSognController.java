@@ -32,7 +32,6 @@ public class RestSognController {
         return ResponseEntity.status(HttpStatus.OK).body(kommuneRepo.findAll());
     }
 
-
     @GetMapping("/sogn/{id}")
     public ResponseEntity<Optional<Sogn>> findById(@PathVariable Long id)
     {

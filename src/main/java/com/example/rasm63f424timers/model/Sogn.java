@@ -14,7 +14,6 @@ public class Sogn {
     private String nedlukningStart;
 
     @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name="kommune_id")
     private Kommune kommune;
 
     public Sogn(){
